@@ -1,3 +1,7 @@
+require "pry"
+require "yaml"
+MESSAGES = YAML.load_file('messages.yml')
+
 def calculator(x,y,operation)
   if x.to_i.integer?
     x = x.to_i
