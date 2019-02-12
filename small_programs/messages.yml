@@ -1,2 +1,9 @@
-welcome: "Welcome to Calculator! Enter your name:"
-valid_name: "Make sure to enter a valid name:"
+calc_prompt: "I'm your mortgage calculator!
+
+Please enter the loan amount (in USD)
+
+interest rate (APR) and loan duration (in years)"
+
+output: "With a loan principal of $%{principal}, an APR of %{rate*100).to_i%, & a term of %{duration} years,
+
+your monthly payments will be: $%{calc(principal, rate, duration).to_i}."
