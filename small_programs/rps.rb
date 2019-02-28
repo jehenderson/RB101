@@ -1,42 +1,51 @@
-CHOICES = ["rock", "paper", "scissors"]
+VALID_CHOICES = ["rock", "paper", "scissors", "lizard", "spock"]
+user_response, computer_response = [], []
+wins, losses, ties = 0, 0, 0
+score = [wins, losses, ties]
+results = [user_response, computer_response]
 
-def prompt(message)
-  Kernel.puts("=> #{message}")
+def win?(user1, user2)
+  if (user1 == "rock" && user2 == "scissors") ||
+      (user1 == "rock" && user2 == "lizard") ||
+      (user1 == "paper" && user2 == "rock") ||
+      (user1 == "paper" && user2 == "spock") ||
+      (user1 == "scissors" && user2 == "paper") ||
+      (user1 == "scissors" && user2 == "lizard") ||
+      (user1 == "lizard" && user2 == "paper") ||
+      (user1 == "lizard" && user2 == "spock")
+        true
+  end
 end
 
-def play(choice, computer_choice)
+def get_choice
+  choice = ''
   loop do
-    prompt("Choose one: #{CHOICES.join(', ')}")
+    puts "Choose one: #{VALID_CHOICES.join(', ')}"
     choice = Kernel.gets.chomp
-
-    if CHOICES.include?(choice)
-      break
-    else
-      puts "That's not a valid choice."
-    end
+    break if VALID_CHOICES.include?(choice)
+    puts "Please enter a valid choice. Valid choices are #{VALID_CHOICES.join(', ')}"
   end
+  choice
+end  
 
-  Kernel.puts("You chose #{choice}, computer chose #{computer_choice}")
-
-  if (choice == "rock" && computer_choice == "scissors") ||
-      (choice == "paper" && computer_choice == "rock") ||
-      (choice == "scissors" && computer_choice == "paper")
-    prompt("You won!")
-  elsif (choice == "rock" && computer_choice == "paper")
-         (choice == "paper" && computer_choice == "scissors")
-         (choice == "scissors" && computer_choice == "rock")
-    prompt("You lost!")
-  else
-    prompt("You tied!")
-  end
-end
-
-choice = ''
-computer_choice = CHOICES.sample
-
+counter = 0
 loop do
-  play(choice, computer_choice)
-  prompt("Do you want to play again?")
+  user_response << get_choice
+  computer_response << VALID_CHOICES.sample
+  puts "You chose #{user_response[counter]}, computer chose #{computer_response[counter]}:"
+  if win?(user_response[counter], computer_response[counter])
+    score[0] += 1
+    puts "You won!"
+  elsif win?(computer_response[counter], user_response[counter])
+    score[1] += 1
+    puts "You lost!"
+  else
+    score[2] += 1
+    puts "You tied!"
+  end
+  counter += 1
+  puts "Do you want to play again?"
   answer = gets.chomp
   break unless answer.downcase.start_with?('y')
 end
+puts "Your score was #{score[0]} wins, #{score[1]} losses, & #{score[2]} ties."
