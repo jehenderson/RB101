@@ -24,7 +24,7 @@ Style/BracesAroundHashParameters:
   Description: Forces certain brace styles when the last argument is a hash.
   Enabled: false
 
-Style/CommandLiteral
+Style/CommandLiteral:
   Description: 'Use `` or %x around command literals.'
   Enabled: true
   #backticks: Always use backticks
@@ -173,7 +173,7 @@ Style/RegexpLiteral:
   EnforcedStyle: mixed
   AllowInnerSlashes: false
 
-Style/SafeNavigation
+Style/SafeNavigation:
   Description: >-
                  This cop transforms usages of a method call safeguarded by
                  a check for the existance of the object to 
